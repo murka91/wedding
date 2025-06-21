@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Марсель & Динара - 01.08.2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;500;600;700&family=Great+Vibes&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Viaoda+Libre&display=swap" rel="stylesheet">    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Montserrat", sans-serif;
+            background-color: #fff;
+            color: #333;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .invitation-container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 5vh auto;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .hero-section {
+            display: flex;
+            flex-direction: row;
+            min-height: 70vh;
+        }
+
+        .content {
+            flex: 1;
+            padding: 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            text-align: center;
+        }
+
+        .names {
+            font-family: "Cormorant SC", serif;
+            font-weight: 300;            
+            font-size: 4.5rem;
+            color: #000;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(20px) skewY(-2deg);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .date {
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out 0.3s, transform 1s ease-out 0.3s;
+        }
+
+        .time {
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out 0.6s, transform 1s ease-out 0.6s;
+        }
+
+        .hero-image {
+            flex: 1;
+            min-height: 300px;
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(100%) contrast(110%);
+            position: relative;
+        }
+
+        .divider {
+            width: 100px;
+            height: 1px;
+            background: #333;
+            margin: 30px auto;
+            opacity: 0;
+            transition: opacity 1s ease-out 0.9s;
+        }
+
+        .corner-decor {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 1px solid #333;
+            opacity: 0.15;
+        }
+
+        .corner-1 {
+            top: 20px;
+            left: 20px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-2 {
+            bottom: 20px;
+            right: 20px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .invitation-section {
+            padding: 10% 15%;
+            text-align: center;
+            position: relative;
+            background-color: #fafafa;
+        }
+
+        .invitation-text {
+            font-family: "Cormorant SC", serif;
+            font-size: 1.8rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .signature {
+            font-family: "Great Vibes", cursive;
+            font-size: 2.5rem;
+            margin-top: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out 0.3s, transform 1s ease-out 0.3s;
+        }
+
+        .section-divider {
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
+            margin: 0 auto;
+        }
+
+        /* Блок расписания - обновленный стиль */
+        .schedule-section {
+            padding: 10% 15%;
+            position: relative;
+            background-color: #fff;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            font-family: "Cormorant SC", serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .section-title:after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 2px;
+            background: #333;
+            margin: 15px auto;
+            opacity: 0.2;
+        }
+
+        .schedule-list {
+            list-style: none;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .schedule-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            position: relative;
+        }
+
+        .schedule-item:last-child {
+            border-bottom: none;
+        }
+
+        .schedule-item-number {
+            position: absolute;
+            left: -25px;
+            top: 0;
+            font-family: "Cormorant SC", serif;
+            font-size: 1rem;
+            color: rgba(0,0,0,0.3);
+        }
+
+        .schedule-icon {
+            width: 50px;
+            height: 50px;
+            background-color: transparent;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .schedule-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: #333;
+            opacity: 0.7;
+        }
+
+        .schedule-content {
+            flex-grow: 1;
+        }
+
+        .schedule-time {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            opacity: 0.8;
+        }
+
+        .schedule-event {
+            font-family: "Cormorant SC", serif;
+            font-size: 1.4rem;
+            color: #333;
+            letter-spacing: 0.5px;
+        }
+
+        /* Декор для блока расписания */
+        .schedule-decor {
+            position: absolute;
+            font-family: "Great Vibes", cursive;
+            color: rgba(0,0,0,0.03);
+            font-size: 8rem;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .decor-1 {
+            top: 50px;
+            right: 50px;
+            transform: rotate(15deg);
+        }
+
+        .decor-2 {
+            bottom: 30px;
+            left: 50px;
+            transform: rotate(-10deg);
+        }
+
+        /* Анимации */
+        .section-animated .names,
+        .section-animated .date,
+        .section-animated .time,
+        .section-animated .divider,
+        .section-animated .invitation-text,
+        .section-animated .signature,
+        .section-animated .section-title,
+        .section-animated .schedule-item {
+            opacity: 1;
+            transform: translateY(0) skewY(0);
+        }
+
+        /* Задержки анимации */
+        .section-animated .schedule-item:nth-child(1) { transition-delay: 0.2s; }
+        .section-animated .schedule-item:nth-child(2) { transition-delay: 0.4s; }
+        .section-animated .schedule-item:nth-child(3) { transition-delay: 0.6s; }
+        .section-animated .schedule-item:nth-child(4) { transition-delay: 0.8s; }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                flex-direction: column-reverse;
+                min-height: 90vh;
+            }
+
+            .hero-image {
+                min-height: 40vh;
+            }
+
+            .content {
+                padding: 15% 10%;
+            }
+
+            .names {
+                font-size: 3.5rem;
+            }
+
+            .date {
+                font-size: 1.5rem;
+            }
+
+            .time {
+                font-size: 1.2rem;
+            }
+
+            .invitation-text {
+                font-size: 1.4rem;
+            }
+
+            .signature {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .schedule-item {
+                flex-direction: column;
+            }
+            
+            .schedule-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .schedule-event {
+                font-size: 1.2rem;
+            }
+
+            .schedule-decor {
+                font-size: 5rem;
+            }
+
+            .decor-1 {
+                top: 30px;
+                right: 20px;
+            }
+
+            .decor-2 {
+                bottom: 20px;
+                left: 20px;
+            }
+        }
+        /* Добавляем только новые стили для блока места проведения */
+        .location-section {
+            padding: 8% 5%;
+            position: relative;
+            background-color: #fafafa;
+        }
+        
+        .location-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .location-info {
+            flex: 1;
+            min-width: 300px;
+        }
+       
+        
+        .location-title {
+            font-family: "Cormorant SC", serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+        
+        .location-address {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            text-align: center;
+        }
+        
+        .location-map {
+            flex: 1;
+            min-width: 100%; /* Занимает всю ширину */
+            height: 650px; /* Увеличиваем высоту карты */
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-top: 10px;
+            margin-bottom: 40px;
+        }
+        
+        .location-map iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            
+        }
+        
+        @media (max-width: 768px) {
+            .location-container {
+                flex-direction: column;
+            }
+            
+            .location-info {
+                order: 1;
+            }
+            
+            .location-map {
+                order: 2;
+                width: 100%;
+            }
+        }
+        /* Стили для блока с правилами */
+        .rules-section {
+            padding: 8% 15%;
+            position: relative;
+            background-color: #fff;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .rules-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .rules-list {
+            list-style: none;
+        }
+
+        .rules-item {
+            margin-bottom: 25px;
+            padding-left: 40px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            font-family: "Cormorant SC", serif;
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .rules-item:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 20px;
+            height: 1px;
+            background: #333;
+            opacity: 0.3;
+        }
+
+        /* Стили для блока с контактами (обновленные) */
+        .contacts-section {
+            padding: 8% 15% 10%;
+            text-align: center;
+            position: relative;
+            background-color: #fafafa;
+        }
+
+        .contacts-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .contacts-text {
+            font-family: "Cormorant SC", serif;
+            font-size: 1.5rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            color: #555;
+        }
+
+        .contacts-phone {
+            font-family: "Montserrat", sans-serif;
+            font-size: 1.2rem;
+            margin: 20px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out 0.3s, transform 1s ease-out 0.3s;
+            color: #333;
+            letter-spacing: 0.5px;
+        }
+
+        .final-signature {
+            font-family: "Great Vibes", cursive;
+            font-size: 2.8rem;
+            margin-top: 50px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out 0.6s, transform 1s ease-out 0.6s;
+            color: #333;
+        }
+
+        /* Декор элементов */
+        .rules-decor {
+            position: absolute;
+            font-family: "Great Vibes", cursive;
+            color: rgba(0,0,0,0.03);
+            font-size: 12rem;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .rules-decor-1 {
+            top: -30px;
+            right: -30px;
+            transform: rotate(15deg);
+        }
+
+        /* Анимации для новых блоков */
+        .section-animated .rules-item,
+        .section-animated .contacts-text,
+        .section-animated .contacts-phone,
+        .section-animated .final-signature {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Задержки анимации */
+        .section-animated .rules-item:nth-child(1) { transition-delay: 0.2s; }
+        .section-animated .rules-item:nth-child(2) { transition-delay: 0.4s; }
+        .section-animated .rules-item:nth-child(3) { transition-delay: 0.6s; }
+        .section-animated .rules-item:nth-child(4) { transition-delay: 0.8s; }
+
+        @media (max-width: 768px) {
+            .rules-item {
+                font-size: 1.1rem;
+                padding-left: 30px;
+            }
+            
+            .contacts-text {
+                font-size: 1.3rem;
+            }
+            
+            .final-signature {
+                font-size: 2.2rem;
+            }
+            
+            .rules-decor {
+                font-size: 8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="invitation-container">
+        <div class="hero-section" id="main-section">
+            <div class="content">
+                <div class="corner-decor corner-1"></div>
+                <div class="corner-decor corner-2"></div>
+                
+                <h1 class="names">МАРСЕЛЬ <br>& <br> ДИНАРА</h1>
+                <div class="divider"></div>
+                <div class="date">1 августа 2025</div>
+                <div class="time">18:00</div>
+            </div>
+            
+            <div class="hero-image" style="background-image: url('1.jpg')"></div>
+        </div>
+
+        <div class="section-divider"></div>
+        
+        <div class="invitation-section" id="invitation-section">
+            <div class="corner-decor corner-1"></div>
+            <div class="corner-decor corner-2"></div>
+            
+            <p class="invitation-text">
+                Дорогие наши родные и друзья!<br>
+                С радостью приглашаем вас разделить с нами<br>
+                самый важный и счастливый день в нашей жизни.
+            </p>
+            
+            <p class="invitation-text" style="transition-delay: 0.2s">
+                Ваше присутствие сделает наш праздник<br>
+                по-настоящему теплым и незабываемым.
+            </p>
+            
+        </div>
+
+        <div class="section-divider"></div>
+        
+        <div class="schedule-section" id="schedule-section">
+            
+            <h2 class="section-title">Программа дня</h2>
+            
+            <ul class="schedule-list">
+                <li class="schedule-item">
+                    <span class="schedule-item-number">01</span>
+                    <div class="schedule-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M16 11c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                          </svg>
+                    </div>
+                    <div class="schedule-content">
+                        <div class="schedule-time">15:30 - 16:00</div>
+                        <div class="schedule-event">Сбор гостей</div>
+                    </div>
+                </li>
+                
+                <li class="schedule-item">
+                    <span class="schedule-item-number">02</span>
+                    <div class="schedule-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                          </svg>
+                    </div>
+                    <div class="schedule-content">
+                        <div class="schedule-time">16:00 - 16:20</div>
+                        <div class="schedule-event">Беташар</div>
+                    </div>
+                </li>
+                
+                <li class="schedule-item">
+                    <span class="schedule-item-number">03</span>
+                    <div class="schedule-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M8.1 13.34l2.83-2.83L3.91 3.5c-1.56 1.56-1.56 4.09 0 5.66l4.19 4.18zm6.78-1.81c1.53.71 3.68.21 5.27-1.38 1.91-1.91 2.28-4.65.81-6.12-1.46-1.46-4.2-1.1-6.12.81-1.59 1.59-2.09 3.74-1.38 5.27L3.7 19.87l1.41 1.41L12 14.41l6.88 6.88 1.41-1.41L13.41 13l1.47-1.47z"/>
+                        </svg>
+                    </div>
+                    <div class="schedule-content">
+                        <div class="schedule-time">16:20 - 22:00</div>
+                        <div class="schedule-event">Банкет</div>
+                    </div>
+                </li>
+                
+                <li class="schedule-item">
+                    <span class="schedule-item-number">04</span>
+                    <div class="schedule-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6zm-1.5 16c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                        </svg>
+                    </div>
+                    <div class="schedule-content">
+                        <div class="schedule-time">22:00 - 23:00</div>
+                        <div class="schedule-event">Дискотека</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+          <!-- Обновленная секция с увеличенной картой -->
+        <div class="location-section" id="location-section">
+            <div class="corner-decor corner-1"></div>
+            <div class="corner-decor corner-2"></div>
+            
+            <h2 class="section-title">Место проведения</h2>
+            
+            <div class="location-container">
+                <div class="location-info">
+                    <h3 class="location-title">Банкетный зал "Серебро"</h3>
+                    <p class="location-address">
+                        ул. 22 Декабря, 89, 2 этаж<br>
+                        Кировский округ, Омск, 644015
+                    </p>
+                </div>
+                
+                <!-- Увеличенная карта -->
+                <div class="location-map">
+                    <iframe src="https://widgets.2gis.com/widget?type=firmsonmap&options=%7B%22pos%22%3A%7B%22lat%22%3A54.966755%2C%22lon%22%3A73.378495%2C%22zoom%22%3A17%7D%2C%22opt%22%3A%7B%22city%22%3A%22omsk%22%7D%2C%22org%22%3A%2270000001045942244%22%7D" width="100%" height="100%" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+<!-- Новый блок с правилами -->
+<div class="rules-section" id="rules-section">
+    <div class="corner-decor corner-1"></div>
+    <div class="corner-decor corner-2"></div>
+    <div class="rules-decor rules-decor-1">Rules</div>
+    
+    <h2 class="section-title">Наши пожелания</h2>
+    
+    <div class="rules-container">
+        <ul class="rules-list">
+            <li class="rules-item">
+                Мы планируем взрослый праздник, поэтому будем признательны, 
+                если вы сможете оставить детей дома
+            </li>
+            <li class="rules-item">
+                Для удобства планирования, пожалуйста, подтвердите 
+                ваше присутствие до 15 июля 2025 года
+            </li>
+            <li class="rules-item">
+                Поддержите наш вечер стилем: для мужчин - костюмы, 
+                для женщин - вечерние платья
+            </li>
+            <li class="rules-item">
+                Вместо цветов в букетах мы будем рады бутылочке хорошего 
+                вина или другому памятному подарку
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- Блок с контактами (обновленный дизайн) -->
+<div class="contacts-section" id="contacts-section">
+    <div class="corner-decor corner-1"></div>
+    <div class="corner-decor corner-2"></div>
+    
+    <div class="contacts-container">
+        <p class="contacts-text">
+            Если у вас есть вопросы или нужна помощь,<br>
+            мы всегда на связи
+        </p>
+        
+        <div class="contacts-phone">Марсель: +7 (XXX) XXX-XX-XX</div>
+        <div class="contacts-phone">Динара: +7 (XXX) XXX-XX-XX</div>
+        
+        <div class="final-signature">Ваши <br> Марсель & Динара</div>
+    </div>
+</div>
+</div>
+    </div>
+
+    <script>
+        // Функция для проверки видимости элемента
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.75 &&
+                rect.bottom >= 0
+            );
+        }
+
+        // Обработчик прокрутки
+        function handleScroll() {
+            const sections = [
+                document.getElementById('main-section'),
+                document.getElementById('invitation-section'),
+                document.getElementById('schedule-section'),
+                document.getElementById('location-section'),
+                document.getElementById('rules-section'),
+                document.getElementById('contacts-section')
+            ];
+            
+            sections.forEach(section => {
+                if (isElementInViewport(section) ) {
+                    section.classList.add('section-animated');
+                }
+            });
+        }
+
+        // Инициализация при загрузке
+        window.addEventListener('load', function() {
+            // Проверяем сразу видимые элементы
+            handleScroll();
+            
+            // Добавляем обработчик прокрутки
+            window.addEventListener('scroll', handleScroll);
+        });
+    </script>
+</body>
+</html>
