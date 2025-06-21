@@ -34,7 +34,7 @@
 
         .hero-section {
             display: flex;
-            flex-direction: row;
+            flex-direction: row; /* Всегда фото справа */
             min-height: 70vh;
         }
 
@@ -47,6 +47,16 @@
             position: relative;
             text-align: center;
         }
+
+        .hero-image {
+            flex: 1;
+            min-height: 300px;
+            background-size: cover;
+            background-position: center;
+            /* filter: grayscale(100%) contrast(110%); */
+            position: relative;
+        }
+
 
         .names {
             font-family: "Cormorant SC", serif;
@@ -79,14 +89,7 @@
             transition: opacity 1s ease-out 0.6s, transform 1s ease-out 0.6s;
         }
 
-        .hero-image {
-            flex: 1;
-            min-height: 300px;
-            background-size: cover;
-            background-position: center;
-            filter: grayscale(100%) contrast(110%);
-            position: relative;
-        }
+       
 
         .divider {
             width: 100px;
@@ -274,6 +277,26 @@
             left: 50px;
             transform: rotate(-10deg);
         }
+        .schedule-footnote {
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 5px;
+    font-style: italic;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.section-animated .schedule-footnote {
+    opacity: 0.8;
+    transform: translateY(0);
+}
+
+/* Задержка анимации для сноски */
+.section-animated .schedule-item:nth-child(2) .schedule-footnote {
+    transition-delay: 0.5s;
+}
 
         /* Анимации */
         .section-animated .names,
@@ -294,31 +317,42 @@
         .section-animated .schedule-item:nth-child(3) { transition-delay: 0.6s; }
         .section-animated .schedule-item:nth-child(4) { transition-delay: 0.8s; }
 
+        
         @media (max-width: 768px) {
             .hero-section {
-                flex-direction: column-reverse;
-                min-height: 90vh;
+                flex-direction: row; /* Сохраняем фото справа и на мобильных */
+                min-height: auto;
             }
-
+            
             .hero-image {
                 min-height: 40vh;
+                width: 50%; /* Занимает половину экрана */
             }
-
+            
             .content {
-                padding: 15% 10%;
+                width: 50%; /* Занимает половину экрана */
+                padding: 5%;
             }
-
+            
             .names {
-                font-size: 3.5rem;
+                font-size: 2.5rem; /* Уменьшаем размер для мобилок */
             }
-
-            .date {
-                font-size: 1.5rem;
-            }
-
-            .time {
+            
+            .date, .time {
                 font-size: 1.2rem;
             }
+        }
+
+        @media (max-width: 480px) {
+            .names {
+                font-size: 2rem;
+            }
+            
+            .date, .time {
+                font-size: 1rem;
+            }
+        }
+        @media (max-width: 768px) {
 
             .invitation-text {
                 font-size: 1.4rem;
@@ -565,11 +599,234 @@
                 font-size: 8rem;
             }
         }
+        /* цветова палитра */
+        .colors-section {
+            padding: 8% 10%;
+            position: relative;
+            background-color: #fff;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .colors-container {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .colors-description {
+            font-family: "Cormorant SC", serif;
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #555;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 0 10px;
+        }
+
+        .colors-palette {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            margin: 40px auto;
+            max-width: 90%;
+            perspective: 1000px;
+        }
+
+        .color-item {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+            opacity: 0;
+            transform: translateY(20px) scale(0.98);
+            overflow: hidden;
+        }
+
+        .color-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: inherit;
+            border-radius: 50%;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .color-item:hover {
+            transform: scale(1.12) translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.18);
+            z-index: 1;
+        }
+
+        .color-item:hover::before {
+            transform: scale(1.05);
+            filter: brightness(1.08);
+        }
+
+        .color-name {
+            position: absolute;
+            bottom: -28px;
+            width: 100%;
+            text-align: center;
+            font-family: "Montserrat", sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #333;
+            letter-spacing: 0.5px;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0.9;
+        }
+
+        .color-item:hover .color-name {
+            bottom: -32px;
+            font-weight: 600;
+            opacity: 1;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* Конкретные цвета с градиентами */
+        .fuchsia { background: linear-gradient(135deg, #CF0170, #CF0170); }
+        .red { background: linear-gradient(135deg, #FE0104, #FE0104); }
+        .pink { background: linear-gradient(135deg, #F1A7CC, #F1A7CC); }
+        .peach { background: linear-gradient(135deg, #FA9A84, #FA9A84); }
+        .powder { background: linear-gradient(135deg, #E8B2B2, #E8B2B2); }
+
+        /* Декоративные элементы */
+        .colors-decor {
+            position: absolute;
+            font-family: "Great Vibes", cursive;
+            color: rgba(0,0,0,0.03);
+            font-size: 15rem;
+            z-index: 0;
+            pointer-events: none;
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .colors-decor-1 {
+            top: -50px;
+            right: -50px;
+            transform: rotate(15deg) translateX(20px);
+            opacity: 0;
+        }
+
+        .colors-decor-2 {
+            bottom: -50px;
+            left: -50px;
+            transform: rotate(-15deg) translateX(-20px);
+            opacity: 0;
+        }
+
+        /* Анимации */
+        .section-animated .colors-description {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-animated .color-item {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .section-animated .colors-decor-1,
+        .section-animated .colors-decor-2 {
+            opacity: 1;
+            transform: rotate(15deg) translateX(0);
+        }
+
+        .section-animated .colors-decor-2 {
+            transform: rotate(-15deg) translateX(0);
+        }
+
+        /* Задержки анимации */
+        .section-animated .color-item:nth-child(1) { transition-delay: 0.15s; }
+        .section-animated .color-item:nth-child(2) { transition-delay: 0.25s; }
+        .section-animated .color-item:nth-child(3) { transition-delay: 0.35s; }
+        .section-animated .color-item:nth-child(4) { transition-delay: 0.45s; }
+        .section-animated .color-item:nth-child(5) { transition-delay: 0.55s; }
+
+        @media (max-width: 768px) {
+            .colors-section {
+                padding: 12% 5%;
+            }
+            
+            .colors-description {
+                font-size: 1.1rem;
+                margin-bottom: 30px;
+                padding: 0 5px;
+            }
+            
+            .colors-palette {
+                gap: 15px;
+                margin: 30px auto;
+            }
+            
+            .color-item {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .color-name {
+                font-size: 0.85rem;
+                bottom: -24px;
+            }
+            
+            .color-item:hover .color-name {
+                bottom: -26px;
+            }
+            
+            .colors-decor {
+                font-size: 10rem;
+            }
+            
+            .colors-decor-1 {
+                top: -30px;
+                right: -30px;
+            }
+            
+            .colors-decor-2 {
+                bottom: -30px;
+                left: -30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .color-item {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .color-name {
+                font-size: 0.8rem;
+                bottom: -22px;
+            }
+            
+            .colors-palette {
+                gap: 12px;
+            }
+        }
+          
     </style>
 </head>
 <body>
     <div class="invitation-container">
+        <!-- Первый блок с измененным порядком -->
         <div class="hero-section" id="main-section">
+            <!-- Контент теперь слева -->
             <div class="content">
                 <div class="corner-decor corner-1"></div>
                 <div class="corner-decor corner-2"></div>
@@ -577,11 +834,13 @@
                 <h1 class="names">МАРСЕЛЬ <br>& <br> ДИНАРА</h1>
                 <div class="divider"></div>
                 <div class="date">1 августа 2025</div>
-                <div class="time">18:00</div>
+                <div class="time">15:00</div>
             </div>
             
+            <!-- Фото теперь справа -->
             <div class="hero-image" style="background-image: url('1.jpg')"></div>
         </div>
+
 
         <div class="section-divider"></div>
         
@@ -627,14 +886,18 @@
                     <div class="schedule-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                          </svg>
+                        </svg>
                     </div>
                     <div class="schedule-content">
                         <div class="schedule-time">16:00 - 16:20</div>
                         <div class="schedule-event">Беташар</div>
+                        <div class="schedule-footnote">
+                            Беташар (букв. «раскрытие лица») — обряд знакомства невесты с роднёй мужа, специально приглашается поэт-импровизатор — ақын,
+                             который с помощью песни, играя на домбре, 
+                            представляет невесте родственников и близких жениха. Они же, в свою очередь, кладут вознаграждение. Каждого родственника невеста приветствует поклоном.
+                        </div>
                     </div>
                 </li>
-                
                 <li class="schedule-item">
                     <span class="schedule-item-number">03</span>
                     <div class="schedule-icon">
@@ -662,6 +925,41 @@
                 </li>
             </ul>
         </div>
+          <!-- Улучшенный блок с цветовой гаммой -->
+          <div class="colors-section" id="colors-section">
+            <div class="corner-decor corner-1"></div>
+            <div class="corner-decor corner-2"></div>
+            <div class="colors-decor colors-decor-1">Colors</div>
+            <div class="colors-decor colors-decor-2">Palette</div>
+            
+            <h2 class="section-title">Цветовая палитра</h2>
+            
+            <div class="colors-container">
+                <p class="colors-description">
+                    Для создания гармоничного визуального образа праздника<br>
+                    мы подготовили вдохновляющую цветовую палитру
+                </p>
+                
+                <div class="colors-palette">
+                    <div class="color-item fuchsia">
+                        <span class="color-name">Фуксия</span>
+                    </div>
+                    <div class="color-item red">
+                        <span class="color-name">Красный</span>
+                    </div>
+                    <div class="color-item pink">
+                        <span class="color-name">Розовый</span>
+                    </div>
+                    <div class="color-item peach">
+                        <span class="color-name">Персиковый</span>
+                    </div>
+                    <div class="color-item powder">
+                        <span class="color-name">Пудровый</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
           <!-- Обновленная секция с увеличенной картой -->
         <div class="location-section" id="location-section">
             <div class="corner-decor corner-1"></div>
@@ -695,20 +993,23 @@
     <div class="rules-container">
         <ul class="rules-list">
             <li class="rules-item">
-                Мы планируем взрослый праздник, поэтому будем признательны, 
-                если вы сможете оставить детей дома
+                Пожалуйста, подтвердите свое присутствие до 20 июля 2025г., 
+                чтобы мы могли спланировать все наилучшим образом.
             </li>
             <li class="rules-item">
-                Для удобства планирования, пожалуйста, подтвердите 
-                ваше присутствие до 15 июля 2025 года
+                Пожалуйста, постарайтесь прибыть к 15:00 в банкетный зал, там вы сможете пообщаться 
+                с родственниками и друзьями с которыми давно не виделись, а так же познакомиться с ведущим.
             </li>
             <li class="rules-item">
-                Поддержите наш вечер стилем: для мужчин - костюмы, 
-                для женщин - вечерние платья
+                Во время церемонии мы просим вас наслаждаться моментом и доверить 
+                съемку профессиональному фотографу. Мы обязательно поделимся с вами всеми фотографиями после свадьбы!
             </li>
             <li class="rules-item">
-                Вместо цветов в букетах мы будем рады бутылочке хорошего 
-                вина или другому памятному подарку
+                Мы просим вас воздержаться от публикации фотографий и видео в социальных сетях во время свадьбы. 
+                Дабы вы могли полноценно насладиться мероприятием!
+            </li>
+            <li class="rules-item">
+                Мы хотим, чтобы вы расслабились, отдохнули и получили удовольствие от праздника вместе с нами.
             </li>
         </ul>
     </div>
@@ -747,23 +1048,23 @@
         }
 
         // Обработчик прокрутки
-        function handleScroll() {
+            function handleScroll() {
             const sections = [
                 document.getElementById('main-section'),
                 document.getElementById('invitation-section'),
                 document.getElementById('schedule-section'),
                 document.getElementById('location-section'),
+                document.getElementById('colors-section'),
                 document.getElementById('rules-section'),
                 document.getElementById('contacts-section')
             ];
             
             sections.forEach(section => {
-                if (isElementInViewport(section) ) {
+                if (isElementInViewport(section)) {
                     section.classList.add('section-animated');
                 }
             });
         }
-
         // Инициализация при загрузке
         window.addEventListener('load', function() {
             // Проверяем сразу видимые элементы
