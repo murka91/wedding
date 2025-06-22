@@ -8,7 +8,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='white'/><text x='50%' y='70%' font-family='Great Vibes, cursive' font-size='60' text-anchor='middle' fill='black'>МД</text></svg>">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;500;600;700&family=Great+Vibes&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Viaoda+Libre&display=swap" rel="stylesheet">    <style>
-        * {
+         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -35,8 +35,23 @@
 
         .hero-section {
             display: flex;
-            flex-direction: row; /* Всегда фото справа */
+            flex-direction: row;
             min-height: 70vh;
+            position: relative; /* Добавляем для позиционирования псевдоэлемента */
+        }
+
+        /* Добавляем псевдоэлемент для фоновой картинки */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("l22.png");
+            background-size: cover;
+            background-position: center;
+            z-index: 0; /* Помещаем под контент */
         }
 
         .content {
@@ -47,6 +62,8 @@
             justify-content: center;
             position: relative;
             text-align: center;
+            z-index: 1; /* Помещаем над фоном */
+            background-color: rgba(255, 255, 255, 0); 
         }
 
         .hero-image {
@@ -54,14 +71,14 @@
             min-height: 300px;
             background-size: cover;
             background-position: center;
-            /* filter: grayscale(100%) contrast(110%); */
             position: relative;
+            z-index: 1; /* Помещаем над фоном */
         }
 
-
+        /* Остальные стили остаются без изменений */
         .names {
             font-family: "Cormorant SC", serif;
-            font-weight: 300;            
+            font-weight: 800;            
             font-size: 4.5rem;
             color: #000;
             margin-bottom: 20px;
@@ -172,6 +189,7 @@
             margin-bottom: 40px;
             position: relative;
             opacity: 0;
+            color: #88122D;
             transform: translateY(20px);
             transition: opacity 1s ease-out, transform 1s ease-out;
         }
@@ -216,26 +234,55 @@
             font-size: 1rem;
             color: rgba(0,0,0,0.3);
         }
-
         .schedule-icon {
-            width: 50px;
-            height: 50px;
-            background-color: transparent;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 20px;
-            flex-shrink: 0;
-            border: 1px solid rgba(0,0,0,0.1);
-        }
+    width: 60px;
+    height: 60px;
+    background-color: rgba(136, 18, 45, 0.1); /* Полупрозрачный фон в цвете заголовков */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    flex-shrink: 0;
+    border: 1px solid rgba(136, 18, 45, 0.2); /* Граница в цвете заголовков */
+    transition: all 0.3s ease;
+}
 
-        .schedule-icon svg {
-            width: 24px;
-            height: 24px;
-            fill: #333;
-            opacity: 0.7;
-        }
+.schedule-icon svg {
+    width: 28px;
+    height: 28px;
+    fill: #88122D; /* Точный цвет как у заголовков */
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+
+/* Эффекты при наведении */
+.schedule-item:hover .schedule-icon {
+    background-color: rgba(136, 18, 45, 0.15);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(136, 18, 45, 0.1);
+}
+
+.schedule-item:hover .schedule-icon svg {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    .schedule-icon {
+        width: 50px;
+        height: 50px;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    
+    .schedule-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+}
+        
 
         .schedule-content {
             flex-grow: 1;
@@ -347,7 +394,7 @@
 
         @media (max-width: 480px) {
             .names {
-                font-size: 2rem;
+                font-size: 3rem;
             }
             
             .date, .time {
